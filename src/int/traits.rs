@@ -27,17 +27,6 @@ macro_rules! define {
 
         $crate::shared::traits::define!(ref => $t, impl => core::ops::Neg, op => neg,);
 
-        #[cfg(feature = "num-traits")]
-        impl core::iter::Sum for $t {
-            #[inline(always)]
-            fn sum<I>(iter: I) -> Self
-            where
-                I: core::iter::Iterator<Item = Self>,
-            {
-                iter.fold(Self::zero(), |acc, element| acc + element)
-            }
-        }
-
         impl core::str::FromStr for $t {
             type Err = $crate::ParseIntError;
 
