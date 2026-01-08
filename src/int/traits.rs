@@ -38,14 +38,6 @@ macro_rules! define {
             }
         }
 
-        #[cfg(feature = "num-traits")]
-        impl ::num_traits::Zero for $t {
-            #[inline(always)]
-            fn zero() -> Self {
-                Self::from_u8(0)
-            }
-        }
-
         impl core::str::FromStr for $t {
             type Err = $crate::ParseIntError;
 
