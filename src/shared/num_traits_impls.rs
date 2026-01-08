@@ -233,6 +233,16 @@ macro_rules! define {
             }
         }
 
+        impl core::iter::Sum for $t {
+            #[inline(always)]
+            fn sum<I>(iter: I) -> Self
+            where
+                I: core::iter::Iterator<Item = Self>,
+            {
+                iter.fold( <Self as ::num_traits::ConstZero>::ZERO, |acc, element| acc + element)
+            }
+        }
+
         $crate::shared::num_traits_impls::define! {
             arity 2,
             type => $t, impl => num_traits::SaturatingAdd, op => saturating_add, out => $t,
